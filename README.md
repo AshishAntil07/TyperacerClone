@@ -1,6 +1,6 @@
-# AshType
+# <img src='https://github.com/AshishAntil07/AshishAntil07/blob/main/4pointedStar.svg' height='50px' width='50px'> AshType
 This is a clone of typeracer for you to practice while offline.<br>
-It is one of my favorite projects that I made in a few days.<br><br>
+It is one of my favorite projects that I made in a few days.<br>
 <hr>
 
 ### 📄 Instructions :-
@@ -17,7 +17,7 @@ It is one of my favorite projects that I made in a few days.<br><br>
   <li>Our AshType provides you a Bot that types at your average speed.</li>
   <li>Your best score is preserved.</li>
   <li>Provides a user-friendly Interface.</li>
-</ul><br>
+</ul>
 <hr>
 
 ### 👁 Preview :-
