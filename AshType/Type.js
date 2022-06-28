@@ -11,13 +11,15 @@ const results = document.getElementById("resultDiv");
 const font = document.getElementById("font");
 const actualText = document.getElementById("actualText");
 const characterElem = document.getElementById("currentChar");
+const myName = localStorage.getItem("uname");
+const firstName = myName.slice(0, myName.indexOf(" ")!==-1?myName.indexOf(' '):myName.length);
 
 let startMoments=4, haveMistaken=false, rank=1, minutes=1;
 let allSeconds=0, slice="", isCompletedBot, fontIndex=0;
 let count=0, index, raceInputLen=0, firstIM=0, fontSlice="";
 let seconds=59, botAverage=40, isCompletedClient, count2=1;
 
-document.querySelector("#uName").innerHTML = document.querySelector("#name").innerHTML = localStorage.getItem("uname");
+document.querySelector("#uName").innerHTML = document.querySelector("#name").innerHTML = name;
 document.querySelector("#profPic").innerHTML = `<img src="${localStorage.getItem("picURL")}" height = "100%" width = "100%" alt="Wrong URL specified.">`;
 
 const time = new Date().toLocaleTimeString();
@@ -27,18 +29,18 @@ if(hour > 12){
 }
 if(time.includes("PM")){
   if(hour < 4 || hour === 12){
-    greeting.innerHTML = `Good AfterNoon, ${localStorage.getItem("uname").slice(0, localStorage.getItem("uname").indexOf(" "))} Sir`;
+    greeting.innerHTML = `Good AfterNoon, ${firstName} Sir`;
   }else if(hour < 8){
-    greeting.innerHTML = `Good Evening, ${localStorage.getItem("uname").slice(0, localStorage.getItem("uname").indexOf(" "))} Sir`;
+    greeting.innerHTML = `Good Evening, ${firstName} Sir`;
   }else{
-    greeting.innerHTML = `Good Night, ${localStorage.getItem("uname").slice(0, localStorage.getItem("uname").indexOf(" "))} Sir`;
+    greeting.innerHTML = `Good Night, ${firstName} Sir`;
   }
 }
 if(time.includes("AM")){
   if(hour < 4){
-    greeting.innerHTML = `Good Night, ${localStorage.getItem("uname").slice(0, localStorage.getItem("uname").indexOf(" "))} Sir`;
+    greeting.innerHTML = `Good Night, ${firstName} Sir`;
   }else{
-    greeting.innerHTML = `Good Morning, ${localStorage.getItem("uname").slice(0, localStorage.getItem("uname").indexOf(" "))} Sir`;
+    greeting.innerHTML = `Good Morning, ${firstName} Sir`;
   }
 }
 
@@ -52,10 +54,6 @@ function gettingItems(){
   document.querySelector("#averSpeedA").innerHTML = `${(sum / averageAArr.length).toString().slice(0, 6)} WPM`;
   sum=0;
   for(i=0; i<10; i++){
-    // if(averageAArr[i] === undefined){
-    //   haveBroken = true;
-    //   break;
-    // }
     sum = averageAArr[i]+sum;
   }
   document.querySelector("#averSpeedL").innerHTML = `${(sum / i).toString().slice(0, 5)} WPM`;
