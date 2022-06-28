@@ -103,7 +103,7 @@ function intervalFun(){
     }
     seconds--;
     if(minutes===0 && seconds === -1){
-      results.childNodes[1].childNodes[1].childNodes[3].insertAdjacentHTML('beforeend', `* &nbsp;Your score for the current race will not be saved since you haven't finished the race.`)
+      results.childNodes[1].childNodes[1].childNodes[4].insertAdjacentHTML('beforeend', `* &nbsp;Your score for the current race will not be saved since you haven't finished the race.`)
       clearInterval(timeInterval);
       clearInterval(botInterval);
       raceCompleted(raceWPM, timeTaken, mistakes, false);
