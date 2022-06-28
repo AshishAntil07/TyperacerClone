@@ -1,11 +1,4 @@
 const material = document.getElementById("textAndInput");
-const username = document.getElementById("uName");
-const profile = document.getElementById("profPic");
-const racerName = document.getElementById("name");
-const allAverage = document.getElementById("averSpeedA");
-const _10Averge = document.getElementById("averSpeedL");
-const bestRace = document.getElementById("bestRace");
-const totRaces = document.getElementById("pracRaces");
 const greeting = document.getElementById("greeting");
 const player = document.getElementById("playerContainer");
 const playerBot = document.getElementById("playerContainerBot");
@@ -13,30 +6,19 @@ const completed = document.getElementById("completed");
 const completedBot = document.getElementById("completedBot");
 const playerWPM = document.getElementById("wpm");
 const playerWPMBot = document.getElementById("wpmBot");
-// const raceText = document.getElementById("text");
 const raceInput = document.getElementById("inputBox");
-const againBtn = document.getElementById("raceAgain");
 const results = document.getElementById("resultDiv");
-const resultSpeed = document.getElementById("speed");
-const resultAccuracy = document.getElementById("accuracy");
-const resultTime = document.getElementById("time");
-const timeDiv = document.getElementById("timeDiv");
-const startTime = document.getElementById("actualStartTime");
-const startTimeParent = document.getElementById("startTime");
 const font = document.getElementById("font");
 const actualText = document.getElementById("actualText");
 const characterElem = document.getElementById("currentChar");
-// const sliceElem = document.getElementById("slice");
-const notCompleted = document.getElementById("notCompleted");
 
 let startMoments=4, haveMistaken=false, rank=1, minutes=1;
 let allSeconds=0, slice="", isCompletedBot, fontIndex=0;
 let count=0, index, raceInputLen=0, firstIM=0, fontSlice="";
 let seconds=59, botAverage=40, isCompletedClient, count2=1;
 
-username.innerHTML = localStorage.getItem("uname");
-racerName.innerHTML = localStorage.getItem("uname");
-profile.innerHTML = `<img src="${localStorage.getItem("picURL")}" height = "100%" width = "100%" alt="Wrong URL specified.">`;
+document.querySelector("#uName").innerHTML = document.querySelector("#name").innerHTML = localStorage.getItem("uname");
+document.querySelector("#profPic").innerHTML = `<img src="${localStorage.getItem("picURL")}" height = "100%" width = "100%" alt="Wrong URL specified.">`;
 
 const time = new Date().toLocaleTimeString();
 let hour = new Date().getHours();
@@ -67,7 +49,7 @@ function gettingItems(){
   for(i=0; i<averageAArr.length; i++){
     sum = averageAArr[i]+sum;
   }
-  allAverage.innerHTML = `${(sum / averageAArr.length).toString().slice(0, 6)} WPM`;
+  document.querySelector("#averSpeedA").innerHTML = `${(sum / averageAArr.length).toString().slice(0, 6)} WPM`;
   sum=0;
   for(i=0; i<10; i++){
     // if(averageAArr[i] === undefined){
@@ -76,7 +58,7 @@ function gettingItems(){
     // }
     sum = averageAArr[i]+sum;
   }
-  _10Averge.innerHTML = `${(sum / i).toString().slice(0, 5)} WPM`;
+  document.querySelector("#averSpeedL").innerHTML = `${(sum / i).toString().slice(0, 5)} WPM`;
   botAverage = parseInt(sum / i);
   let bestWPM = 0;
   for(i=0; i<averageAArr.length; i++){
@@ -84,15 +66,18 @@ function gettingItems(){
       bestWPM=averageAArr[i];
     }
   }
-  bestRace.innerHTML = `${bestWPM} WPM`;
-  totRaces.innerHTML = `${averageAArr.length}`;
+  document.querySelector("#bestRace").innerHTML = `${bestWPM} WPM`;
+  document.querySelector("#pracRaces").innerHTML = `${averageAArr.length}`;
 }
 if(JSON.parse(localStorage.getItem("everSpeed")) !== null){
   gettingItems();
 }
 
-
-actualText.insertAdjacentHTML("beforeend", random());
+try{
+  actualText.insertAdjacentHTML("beforeend", random());
+}catch(err){
+  location.reload();
+}
 characterElem.innerHTML = actualText.innerHTML[0];
 actualText.innerHTML = actualText.innerHTML.replace(characterElem.innerHTML, "");
 index = actualText.innerHTML.indexOf(" ");
@@ -111,16 +96,16 @@ for(let i=0; i<splittedAT.length; i++){
 raceInput.setAttribute("maxlength", maxlength+5);
 
 let mistakes=0, raceWPM, timeTaken, lastWPM, timeInterval, clientInterval, botInterval, botStopper;
-function intervalFun(_clearHelper){
+function intervalFun(){
   timeInterval = setInterval(() => {
     if(seconds>9){
-      timeDiv.innerHTML = `${minutes}:${seconds}`;
+      document.querySelector("#timeDiv").innerHTML = `${minutes}:${seconds}`;
     }else{
-      timeDiv.innerHTML = `${minutes}:0${seconds}`;
+      document.querySelector("#timeDiv").innerHTML = `${minutes}:0${seconds}`;
     }
     seconds--;
     if(minutes===0 && seconds === -1){
-      notCompleted.style.display = "block";
+      results.childNodes[1].childNodes[1].childNodes[3].insertAdjacentHTML('beforeend', `* &nbsp;Your score for the current race will not be saved since you haven't finished the race.`)
       clearInterval(timeInterval);
       clearInterval(botInterval);
       raceCompleted(raceWPM, timeTaken, mistakes, false);
@@ -205,20 +190,20 @@ const raceCompleted = (wpm, time, typos, isCompleted) => {
   results.style.display = "flex";
   playerWPM.innerHTML = `${wpm} WPM`;
   if(wpm === undefined){
-    resultSpeed.innerHTML = `Speed: 0 WPM`;
+    results.childNodes[1].childNodes[1].childNodes[1].innerHTML = `Speed: 0 WPM`;
   }else{
-    resultSpeed.innerHTML = `Speed: ${wpm} WPM`;
+    results.childNodes[1].childNodes[1].childNodes[1].innerHTML = `Speed: ${wpm} WPM`;
   }
-  const fullPercent = (((font.innerHTML.length - typos) / font.innerHTML.length) * 100).toString();
+  const fullPercent = parseFloat(((font.innerHTML.length - typos) / font.innerHTML.length) * 100).toString();
   if(!isNaN(fullPercent)){
-    resultAccuracy.innerHTML = `Accuracy: ${fullPercent.slice(0, 4)}%`;
+    results.childNodes[1].childNodes[1].childNodes[2].innerHTML = `Accuracy: ${fullPercent.slice(0, 4)}%`;
   }else{
-    resultAccuracy.innerHTML = `Accuracy: 100%`;
+    results.childNodes[1].childNodes[1].childNodes[2].innerHTML = `Accuracy: 100%`;
   }
   if(time===undefined){
-    resultTime.innerHTML = `Time: 2:00 min`
+    results.childNodes[1].childNodes[1].childNodes[3].innerHTML = `Time: 2:00 min`
   }else{
-    resultTime.innerHTML = `Time: ${time} min`;
+    results.childNodes[1].childNodes[1].childNodes[3].innerHTML = `Time: ${time} min`;
   }
   if(isCompleted){
     updateLocalStorage();
@@ -229,7 +214,6 @@ const raceCompleted = (wpm, time, typos, isCompleted) => {
 }
 
 const checkMistake = () => {
-  debugger;
   if(realSlice === raceInput.value || raceInput.value === "" || raceInput.value === characterElem.innerHTML){
     characterElem.style.backgroundColor = "transparent";
     raceInput.style.backgroundColor = "white";
@@ -242,21 +226,17 @@ const checkMistake = () => {
   }
 }
 const checkSpace = (smartened = false) => {
-  debugger;
-  // if(!haveMistaken && raceInput.value[raceInput.value.length-1] === " "){
-    if(smartened === false){raceInput.value = "";}
-    index = actualText.innerHTML.indexOf(" ");
-    fontIndex = font.innerHTML.lastIndexOf(" ");
-    fontSlice = font.innerHTML.slice(fontIndex+1, font.innerHTML.length)
-    slice = fontSlice + characterElem.innerHTML + actualText.innerHTML.slice(0, index+1);
-    if(index===-1){
-      slice = fontSlice + characterElem.innerHTML + actualText.innerHTML;
-    }
-  // }
+  if(smartened === false){raceInput.value = "";}
+  index = actualText.innerHTML.indexOf(" ");
+  fontIndex = font.innerHTML.lastIndexOf(" ");
+  fontSlice = font.innerHTML.slice(fontIndex+1, font.innerHTML.length)
+  slice = fontSlice + characterElem.innerHTML + actualText.innerHTML.slice(0, index+1);
+  if(index===-1){
+    slice = fontSlice + characterElem.innerHTML + actualText.innerHTML;
+  }
 }
 
 function listenFun(){
-  debugger;
   if(actualText.innerHTML[0] === undefined && count !== 1 && haveMistaken===false && raceInput.value[raceInput.value.length-1] === characterElem.innerHTML && raceInput.value === slice){
     if(rank === 1){
       completed.innerHTML = `${rank}st Place!`
@@ -347,19 +327,15 @@ function listenFun(){
 
 raceInput.addEventListener("input", listenFun);
 
-const raceStarted = () => {
-  raceInput.removeAttribute("disabled");
-  raceInput.value = "";
-  raceInput.focus();
-}
-
 const startInterval = setInterval(() => {
   if(startMoments === -1){
     clearInterval(startInterval);
-    startTimeParent.style.display = "none";
-    raceStarted();
+    document.querySelector("#startTime").style.display = "none";
+    raceInput.disabled = false;
+    raceInput.value = "";
+    raceInput.focus();
     intervalFun();
   }
-  startTime.innerHTML = `:${startMoments}`;
+  document.querySelector("#actualStartTime").innerHTML = `:${startMoments}`;
   startMoments--;
 }, 1000)
