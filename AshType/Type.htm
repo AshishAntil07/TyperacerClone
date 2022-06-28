@@ -14,13 +14,15 @@
     <div class="statistics">
       <span class = "container">
         <span id="profPic"></span>
-        <span class="data">
-          <span id="uName"></span>
-          <span id="averSpeedA" class="performance" title="Average Speed(All time)">0 WPM</span>
-          <span id="averSpeedL" class="performance" title="Average Speed(last 10)">0 WPM</span>
-          <span id="bestRace" class="performance" title="All time Best">0 WPM</span>
-          <span id="pracRaces" class="performance" title="Number of races">0</span>
-        </span>
+        <div style="display: flex;flex-flow: column nowrap;">
+          <div id="uName"></div>
+          <span class="data">
+            <span id="averSpeedA" class="performance" title="Average Speed(All time)">0 WPM</span>
+            <span id="averSpeedL" class="performance" title="Average Speed(last 10)">0 WPM</span>
+            <span id="bestRace" class="performance" title="All time Best">0 WPM</span>
+            <span id="pracRaces" class="performance" title="Number of races">0</span>
+          </span>
+        </div>
       </span>
     </div>
     <h1 class = "welcome" id="greeting"></h1>
@@ -76,19 +78,8 @@
     </div>
 
     <div id="resultDiv" class="resultsContainer">
-      <div class="results">
-        <span class="sideLogo">
-          <img src="Pictures/Logo.jpg" height="80%" width="80%" alt="Logo">
-        </span>
-        <div class="actualResults">
-          <div class="header">
-            You just typed a quote from:-<br>
-            <span>AshType Library</span>
-          </div>
-          <div class="resultChild" id="speed"></div>
-          <div class="resultChild" id="accuracy"></div>
-          <div class="resultChild" id="time"></div>
-          <div class="resultChild" id="notCompleted">* &nbsp;Your score for the current race will not be saved since you haven't finished the race.</div>
+      <div class="results"><span class="sideLogo"><img src="Pictures/Logo.jpg" height="80%" width="80%" alt="Logo"></span><div class="actualResults"><div class="header">You just typed a quote from:-<br><span>AshType Library</span>
+          </div><div class="resultChild"></div><div class="resultChild"></div><div class="resultChild"></div><div class="resultChild"></div>
         </div>
       </div>
     </div>
