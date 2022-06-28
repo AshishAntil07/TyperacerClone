@@ -18,13 +18,13 @@ It is one of my favorite projects that I made in a few days.<br>
 </ul>
 
 ## 👁 Preview :
-**While Racing :-**
+### While Racing
 <div>
   <img src = 'https://github.com/AshishAntil07/AshishAntil07/blob/TRClone/preview.png'>
 </div>
 <br>
 
-**Race Finished :-**
+### Race Finished
 <div>
   <img src = 'https://github.com/AshishAntil07/AshishAntil07/blob/TRClone/preview-result.png'>
 </div>
