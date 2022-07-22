@@ -19,7 +19,7 @@ let allSeconds=0, slice="", isCompletedBot, fontIndex=0;
 let count=0, index, raceInputLen=0, firstIM=0, fontSlice="";
 let seconds=59, botAverage=40, isCompletedClient, count2=1;
 
-document.querySelector("#uName").innerHTML = document.querySelector("#name").innerHTML = name;
+document.querySelector("#uName").innerHTML = document.querySelector("#name").innerHTML = myName;
 document.querySelector("#profPic").innerHTML = `<img src="${localStorage.getItem("picURL")}" height = "100%" width = "100%" alt="Wrong URL specified.">`;
 
 const time = new Date().toLocaleTimeString();
