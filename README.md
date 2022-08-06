@@ -31,4 +31,4 @@ It is one of my favorite projects that I made in a few days.<br>
 <br>
 
 ## 📰 License :
-This repository is licensed under [MIT License](https://github.com/AshishAntil07/TyperacerClone/blob/main/LICENSE.md)
+This repository is licensed under [MIT License](https://github.com/AshishAntil07/TyperacerClone/blob/main/LICENSE)
