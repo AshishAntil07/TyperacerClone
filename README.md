@@ -6,9 +6,10 @@ It is one of my favorite projects that I made in a few days.<br>
 <ol>
   <li>Signup on sign up page with your photo and username.</li>
   <li>After following the 1<sup>st</sup> step, visit Type.htm</li>
-  <li>Start typing random texts.</li>
-  <li>If any text doesn't appear, reload the page.</li>
+  <li>Enjoy typing random texts!</li>
 </ol>
+
+_*If you want to add more paragraphs to your practice, you can add them in the paragraphs array in paragraphs.js*_
 
 ## ✨ Features :
 <ul>
