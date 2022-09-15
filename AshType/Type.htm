@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AshType</title>
+    <meta name="description" content="Type to Break!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="Pictures/Logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="Type.css">
+  </head>
+  <body>
+    <div class="statistics">
+      <span class = "container">
+        <span id="profPic"></span>
+        <div style="display: flex;flex-flow: column nowrap;">
+          <div id="uName"></div>
+          <span class="data">
+            <span id="averSpeedA" class="performance" title="Average Speed(All time)">0 WPM</span>
+            <span id="averSpeedL" class="performance" title="Average Speed(last 10)">0 WPM</span>
+            <span id="bestRace" class="performance" title="All time Best">0 WPM</span>
+            <span id="pracRaces" class="performance" title="Number of races">0</span>
+          </span>
+        </div>
+      </span>
+    </div>
+    <h1 class = "welcome" id="greeting"></h1>
+    <h3 class = "welcome">Welcome to your own practice track.</h3>
+
+    <div class="timeDivContainer">
+      <div id="timeDiv">2:00</div>
+    </div>
+    <div id="startTime">
+      Race Starts In<div id="actualStartTime">:5</div>
+    </div>
+    <div id="raceTrack" class="raceTrack">
+      <div id="P1" class="actualTrack">
+        <div id="playerContainer" class="playerContainer">
+          <div class="PComponents name Pname" id="name"></div>
+          <div class="PComponents Pcar" id="Car"></div>
+        </div>
+      </div>
+      <div id="wpmCompleted" class="wpmCompleted">
+        <br>
+        <div id="completed" class="rank">Completed!</div>
+        <div id="wpm" class="wpm">0 WPM</div>
+      </div>
+    </div>
+
+    <div id="raceTrackBot" class="raceTrack">
+      <div id="P1Bot" class="actualTrack">
+        <div id="playerContainerBot" class="playerContainer">
+          <div class="PComponentsBot nameBot Pname" id="nameBot">AshType Bot</div>
+          <div class="PComponentsBot Pcar" id="CarBot"></div>
+        </div>
+      </div>
+      <div id="wpmCompletedBot" class="wpmCompleted">
+        <br>
+        <div id="completedBot" class="rank">Completed!</div>
+        <div id="wpmBot" class="wpm">0 WPM</div>
+      </div>
+    </div>
+
+    <div class="material" id="textAndInput">
+      <div class="justifier">
+        <div id="text">
+          <pre style="font-family: Arial, serif;white-space: pre-line;font-size: 20px;">
+            <span id = "font" unselectable="on"></span><span id="slice"><span id="currentChar" unselectable="on"></span></span><span id="actualText" unselectable="on"></span>
+          </pre>
+        </div>
+        <input type="text" value="You have to type the above text here." autocomplete="true" disabled id="inputBox">
+      </div>
+    </div>
+
+    <div class="optContainer">
+      <a href="Type.htm" id="raceAgain">Race Again</a>
+    </div>
+
+    <div id="resultDiv" class="resultsContainer">
+      <div class="results"><span class="sideLogo"><img src="Pictures/Logo.jpg" height="80%" width="80%" alt="Logo"></span><div class="actualResults"><div class="header">You just typed a quote from:-<br><span>AshType Library</span>
+          </div><div class="resultChild"></div><div class="resultChild"></div><div class="resultChild"></div><div class="resultChild"></div>
+        </div>
+      </div>
+    </div>
+    <script src="paragraphs.js" async></script>
+    <script src="Type.js" async defer></script>
+  </body>
+</html>
