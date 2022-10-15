@@ -14,7 +14,7 @@ _*If you want to add more paragraphs to your practice, you can add them in the p
 ## ✨ Features :
 <ul>
   <li>Our AshType provides you a Bot that types at your average speed.</li>
-  <li>Your best score is preserved.</li>
+  <li>Your score is preserved.</li>
   <li>Provides a user-friendly Interface.</li>
 </ul>
 
