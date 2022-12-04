@@ -1,5 +1,5 @@
 <table align='center' border='0'><tr><td><img src='https://github.com/AshishAntil07/AshishAntil07/blob/home/5pointedStar.svg' height='65px' width='65px'></td> <td><h1>AshType</h1></td></tr></table>
-This is a clone of typeracer for you to practice while offline. 
+This is a clone of typeracer for you to practice. 
 It is one of my favorite projects that I made in a few days.<br>
 
 ## 📄 Instructions :
