@@ -5,7 +5,7 @@ It is one of my favorite projects that I made in a few days.<br>
 ## 📄 Instructions :
 <ol>
   <li>Signup on sign up page with your photo and username.</li>
-  <li>After following the 1<sup>st</sup> step, visit Type.htm</li>
+  <li>After following the 1<sup>st</sup> step, visit index.htm</li>
   <li>Enjoy typing random texts!</li>
 </ol>
 
@@ -17,19 +17,6 @@ _*If you want to add more paragraphs to your practice, you can add them in the p
   <li>Your score is preserved.</li>
   <li>Provides a user-friendly Interface.</li>
 </ul>
-
-## 👁 Preview :
-### While Racing
-<div>
-  <img src = 'https://github.com/AshishAntil07/AshishAntil07/blob/TRClone/preview.png'>
-</div>
-<br>
-
-### Race Finished
-<div>
-  <img src = 'https://github.com/AshishAntil07/AshishAntil07/blob/TRClone/preview-result.png'>
-</div>
-<br>
 
 ## 📰 License :
 This repository is licensed under [MIT License](https://github.com/AshishAntil07/TyperacerClone/blob/main/LICENSE)
