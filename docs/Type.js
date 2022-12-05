@@ -1,4 +1,4 @@
-if(!localStorage.getItem('uname')) window.location.href = 'SignUp.htm';
+if(!localStorage.getItem('uname')) window.location.href = './SignUp/';
 
 const material = document.getElementById("textAndInput");
 const greeting = document.getElementById("greeting");
