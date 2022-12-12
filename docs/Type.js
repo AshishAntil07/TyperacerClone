@@ -63,7 +63,7 @@ function gettingItems(){
     }
   }
   document.querySelector("#averSpeedL").innerHTML = `${(sum / i).toString().slice(0, 5)} WPM`;
-  botAverage = parseInt(sum / i);
+  raceInput.disabled?botAverage = parseInt(sum / i):0;
   let bestWPM = 0;
   for(i=0; i<averageAArr.length; i++){
     if(averageAArr[i]>bestWPM){
@@ -73,7 +73,7 @@ function gettingItems(){
   document.querySelector("#bestRace").innerHTML = `${bestWPM} WPM`;
   document.querySelector("#pracRaces").innerHTML = `${averageAArr.length}`;
 }
-if(JSON.parse(localStorage.getItem("everSpeed")) !== null){
+if(JSON.parse(localStorage.getItem("everSpeed"))){
   gettingItems();
 }
 
@@ -85,7 +85,7 @@ try{
 characterElem.innerHTML = actualText.innerHTML[0];
 actualText.innerHTML = actualText.innerHTML.replace(characterElem.innerHTML, "");
 index = actualText.innerHTML.indexOf(" ");
-fontIndex = font.innerHTML.lastIndexOf(" ")
+fontIndex = font.innerHTML.lastIndexOf(" ");
 fontSlice = font.innerHTML.slice(fontIndex+1, font.innerHTML.length)
 slice = fontSlice + characterElem.innerHTML + actualText.innerHTML.slice(0, index+1);
 
@@ -102,13 +102,11 @@ raceInput.setAttribute("maxlength", maxlength+5);
 let mistakes=0, raceWPM, timeTaken, lastWPM, timeInterval, clientInterval, botInterval, botStopper;
 function intervalFun(){
   timeInterval = setInterval(() => {
-    if(seconds>9){
-      document.querySelector("#timeDiv").innerHTML = `${minutes}:${seconds}`;
-    }else{
-      document.querySelector("#timeDiv").innerHTML = `${minutes}:0${seconds}`;
-    }
+    if(seconds>9) document.querySelector("#timeDiv").innerHTML = `${minutes}:${seconds}`;
+    else document.querySelector("#timeDiv").innerHTML = `${minutes}:0${seconds}`;
+
     seconds--;
-    if(minutes===0 && seconds === -1){
+    if(!minutes && seconds === -1){
       results.childNodes[1].childNodes[1].childNodes[4].insertAdjacentHTML('beforeend', `* &nbsp;Your score for the current race will not be saved since you haven't finished the race.`)
       clearInterval(timeInterval);
       clearInterval(botInterval);
@@ -142,39 +140,30 @@ function intervalFun(){
       }
     }
     let totWPM = randomWPM+botAverage
-    if(lastWPM !== undefined){
-      if((lastWPM-2) > totWPM){
-        totWPM = lastWPM-1;
-      }
-    }
+    if(lastWPM) (lastWPM-2) > totWPM?totWPM = lastWPM-1:0;
     playerWPMBot.innerHTML = `${totWPM} WPM`;
     const fract = (5*(totWPM)*allSeconds/60)/(font.innerHTML.length+actualText.innerHTML.length+characterElem.innerHTML.length);
     let progress = fract*100;
-    try{
-      if(prevProgress < progress){
-        progress = prevProgress
-      }
+
+    try {
+      prevProgress<progress?progress=prevProgress:0
     }catch(err){}
+
     let prevProgress = progress
     playerBot.style.marginLeft = `calc(${progress}% - ${fract*Number(getComputedStyle(playerBot).width.replace('px', ''))}px)`;
     lastWPM = totWPM;
     if(progress >= 89){
       playerBot.style.marginLeft = `calc(100% - ${Number(getComputedStyle(playerBot).width.replace('px', ''))})`;
       clearInterval(botInterval);
-      if(rank === 1){
-        completedBot.innerHTML = `1st Place!`;
-      }else if(rank !== 1){
+      if(rank === 1) completedBot.innerHTML = `1st Place!`;
+      else if(rank !== 1){
         completedBot.innerHTML = `2nd Place!`;
-        if(parseInt(playerWPMBot.innerHTML) > parseInt(playerWPM.innerHTMl)){
-          playerWPMBot.innerHTML = playerWPM.innerHTML;
-        }
+        if(parseInt(playerWPMBot.innerHTML) > parseInt(playerWPM.innerHTMl)) playerWPMBot.innerHTML = playerWPM.innerHTML;
       }
       completedBot.style.visibility = "visible";
       rank++;
       isCompletedBot = true;
-      if(isCompletedClient && isCompletedBot){
-        clearInterval(timeInterval);
-      }
+      if(isCompletedClient && isCompletedBot) clearInterval(timeInterval);
     }
   }, 1000);
 }
@@ -186,37 +175,21 @@ const updateLocalStorage = () => {
 }
 
 const raceCompleted = (wpm, time, typos, isCompleted) => {
-  debugger;
   raceInput.removeEventListener("input", listenFun);
   clearInterval(clientInterval);
-  if(isCompleted === true){
-    player.style.marginLeft = `calc(100% - ${Number(getComputedStyle(player).width.replace('px', ''))}px)`;
-  }
+  if(isCompleted) player.style.marginLeft = `calc(100% - ${Number(getComputedStyle(player).width.replace('px', ''))}px)`;
   material.style.display = "none";
   results.style.display = "flex";
-  playerWPM.innerHTML = `${wpm} WPM`;
-  if(wpm === undefined){
-    results.childNodes[1].childNodes[1].childNodes[1].innerHTML = `Speed: 0 WPM`;
-  }else{
-    results.childNodes[1].childNodes[1].childNodes[1].innerHTML = `Speed: ${wpm} WPM`;
-  }
+  playerWPM.innerHTML = `${wpm?wpm:0} WPM`;
+
+  results.childNodes[1].childNodes[1].childNodes[1].innerHTML = `Speed: ${wpm?wpm:0} WPM`;
   const fullPercent = parseFloat(((font.innerHTML.length - typos) / font.innerHTML.length) * 100).toString();
-  if(!isNaN(fullPercent)){
-    results.childNodes[1].childNodes[1].childNodes[2].innerHTML = `Accuracy: ${fullPercent.slice(0, 4)}%`;
-  }else{
-    results.childNodes[1].childNodes[1].childNodes[2].innerHTML = `Accuracy: 100%`;
-  }
-  if(time===undefined){
-    results.childNodes[1].childNodes[1].childNodes[3].innerHTML = `Time: 2:00 min`
-  }else{
-    results.childNodes[1].childNodes[1].childNodes[3].innerHTML = `Time: ${time} min`;
-  }
-  if(isCompleted){
-    updateLocalStorage();
-  }
-  if(isCompletedClient && isCompletedBot){
-    clearInterval(timeInterval);
-  }
+
+  results.childNodes[1].childNodes[1].childNodes[3].innerHTML = `Time: ${time?time:'2:00'} min`;
+  results.childNodes[1].childNodes[1].childNodes[2].innerHTML = `Accuracy: ${isNaN(fullPercent)?100:fullPercent.slice(0,4)}%`;
+
+  if(isCompleted) updateLocalStorage();
+  if(isCompletedClient && isCompletedBot) clearInterval(timeInterval);
 }
 
 const checkMistake = () => {
@@ -227,35 +200,29 @@ const checkMistake = () => {
     characterElem.style.borderLeft = "1px solid black";
     firstIM = 0;
     return false;
-  }else{
-    return true
   }
+  return true
 }
 const checkSpace = (smartened = false) => {
-  if(smartened === false){raceInput.value = "";}
+  if(smartened === false) raceInput.value = "";
   index = actualText.innerHTML.indexOf(" ");
   fontIndex = font.innerHTML.lastIndexOf(" ");
   fontSlice = font.innerHTML.slice(fontIndex+1, font.innerHTML.length)
   slice = fontSlice + characterElem.innerHTML + actualText.innerHTML.slice(0, index+1);
-  if(index===-1){
-    slice = fontSlice + characterElem.innerHTML + actualText.innerHTML;
-  }
+  if(index===-1) slice = fontSlice + characterElem.innerHTML + actualText.innerHTML;
 }
 
 function listenFun(){
-  if(actualText.innerHTML[0] === undefined && count !== 1 && haveMistaken===false && raceInput.value[raceInput.value.length-1] === characterElem.innerHTML && raceInput.value === slice){
-    if(rank === 1){
-      completed.innerHTML = `${rank}st Place!`
-    }else if(rank === 2){
-      completed.innerHTML = `${rank}nd Place!`;
-    }
+  if(!actualText.innerHTML[0] && count !== 1 && !haveMistaken && raceInput.value[raceInput.value.length-1] === characterElem.innerHTML && raceInput.value === slice){
+    if(rank === 1) completed.innerHTML = `1st Place!`
+    else if(rank === 2) completed.innerHTML = `2nd Place!`;
+
     completed.style.visibility = "visible";
     rank++;
-    if(59-seconds < 10){
-      timeTaken = `${1-minutes}:0${59-seconds}`;
-    }else{
-      timeTaken = `${1-minutes}:${59-seconds}`;
-    }
+
+    if(59-seconds < 10) timeTaken = `${1-minutes}:0${59-seconds}`;
+    else timeTaken = `${1-minutes}:${59-seconds}`;
+
     raceWPM = Math.round(((font.innerHTML.length+characterElem.innerHTML.length) / 5)/(allSeconds/60));
     isCompletedClient = true;
     raceCompleted(raceWPM, timeTaken, mistakes, true);
@@ -297,9 +264,8 @@ function listenFun(){
       font.innerHTML = font.innerHTML.slice(0, font.innerHTML.length-1);
     }
   }
-  if(actualText.innerHTML[0] === undefined){
-    count++;
-  }
+  if(!actualText.innerHTML[0]) count++;
+
   realSlice = slice.slice(0, raceInput.value.length)
   haveMistaken = checkMistake()
   if((raceInput.value[raceInput.value.length-1] !== characterElem.innerHTML || haveMistaken)  && raceInput.value.length > raceInputLen){
@@ -307,22 +273,19 @@ function listenFun(){
     raceInput.style.backgroundColor = "rgb(255, 100, 100)";
     characterElem.style.borderRight = "1px solid black";
     characterElem.style.borderLeft = "none";
-    if(firstIM != 0 && actualText.innerHTML[0] !== undefined){
+    if(firstIM && actualText.innerHTML[0]){
       characterElem.insertAdjacentHTML("beforeend", actualText.innerHTML[0]);
       actualText.innerHTML = actualText.innerHTML.replace(actualText.innerHTML[0], "");
     }
     firstIM++;
-  }else if(raceInput.value.length > raceInputLen && actualText.innerHTML[0] !== undefined){
+  }else if(raceInput.value.length > raceInputLen && actualText.innerHTML[0]){
     font.insertAdjacentHTML("beforeend", characterElem.innerHTML);
     characterElem.innerHTML = actualText.innerHTML[0];
     actualText.innerHTML = actualText.innerHTML.replace(actualText.innerHTML[0], "");
   }
-  if(firstIM === 1 && haveMistaken){
-    mistakes++;
-  }
-  if(!haveMistaken && raceInput.value[raceInput.value.length-1] === " "){
-    checkSpace(false)
-  }
+  if(firstIM === 1 && haveMistaken) mistakes++;
+
+  if(!haveMistaken && raceInput.value[raceInput.value.length-1] === " ") checkSpace(false)
   raceInputLen = raceInput.value.length;
 }
 
