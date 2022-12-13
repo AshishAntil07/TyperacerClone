@@ -152,7 +152,7 @@ function intervalFun(){
     let prevProgress = progress
     playerBot.style.marginLeft = `calc(${progress}% - ${fract*Number(getComputedStyle(playerBot).width.replace('px', ''))}px)`;
     lastWPM = totWPM;
-    if(progress >= 89){
+    if(progress >= 100){
       playerBot.style.marginLeft = `calc(100% - ${Number(getComputedStyle(playerBot).width.replace('px', ''))})`;
       clearInterval(botInterval);
       if(rank === 1) completedBot.innerHTML = `1st Place!`;
